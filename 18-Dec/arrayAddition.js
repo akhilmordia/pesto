@@ -2,7 +2,6 @@
  * Created by akhil on 18/12/19.
  */
 
-//todo: fixing a silly mistake in my code. Pushing it for review.
 function arrayAddition(...arrays)
 {
     let sumArray = [];
