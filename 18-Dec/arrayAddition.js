@@ -20,7 +20,7 @@ function arrayAddition(...arrays)
                 throw "value is not integer!";
             }
 
-            if (!sumArray.includes(index))
+            if (!(index in sumArray))
                 sumArray[index] = 0;
 
             sumArray[index] += value;
