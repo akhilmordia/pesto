@@ -1,31 +1,26 @@
 /**
  * Created by akhil on 17/12/19.
  */
-function expensiveOperation()
-{
-    console.log('expensiveOperation function is called!');
-    return 22;
+
+function keyMaker(fn, params) {
+    return fn.name + JSON.stringify(params);
 }
 
-let memoize = function (memoizeMeImExpensive)
-{
-    if (typeof memoizeMeImExpensive !== "function")
-    {
-        return "Some Error";
+const memoize = function (fn) {
+    if (typeof fn !== 'function') {
+        throw new Error(`Bad Input: Expected "fuction" but received "${typeof fn}"`);
     }
-
-    let hits = {};
-    return function ()
-    {
-        if (!(memoizeMeImExpensive.name in hits))
-        {
-            hits[memoizeMeImExpensive.name] = memoizeMeImExpensive();
+    
+    let cache = new Map();
+    return function (params) {
+        const key = keyMaker(fn, params);
+        if (!cache.has(key)) {
+            cache.set(key, fn(params));
         }
-        return hits[memoizeMeImExpensive.name];
+        return cache.get(key);
     }
 };
 
-const memoized = memoize(expensiveOperation); // <- memoize function
-console.log(memoized());
-console.log(memoized());
-
+module.exports = {
+    memoize: memoize
+};
