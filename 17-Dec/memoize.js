@@ -8,7 +8,7 @@ function keyMaker(fn, params) {
 
 const memoize = function (fn) {
     if (typeof fn !== 'function') {
-        throw new Error(`Bad Input: Expected "fuction" but received "${typeof fn}"`);
+        throw new Error(`Bad Input: Expected "function" but received "${typeof fn}"`);
     }
     
     let cache = new Map();
